@@ -24,15 +24,24 @@ const gifMaker = {
             topicBtn.addClass("button topic-button");
             topicBtn.attr("data-topic", element);
             topicBtn.text(element);
-            $(".one").append(topicBtn);
+            $(".buttons").append(topicBtn);
         });
         $(".topic-button").on("click", function() {
             gifMaker.getGifs($(this));
         });
     },
 
+    addTopic() {
+        let newTopic = $("#topic-input").val().trim();
+        topics.push(newTopic);
+        topics.sort();
+        $(".buttons").empty();
+        $("#topic-input").val("");
+        gifMaker.createButtons();
+    },
+
     getGifs(thisTopic) {
-        $(".two").empty();
+        $(".three").empty();
         let topic = thisTopic.attr("data-topic");
         let queryURL = `https://api.giphy.com/v1/gifs/search?q=${topic}&api_key=C3B2bBZNWCN7FbYAWf7CfSZNN1CRAMl6&limit=10`
         $.ajax({
@@ -43,7 +52,7 @@ const gifMaker = {
             response.data.forEach((element) => {
                 let imageCard = $("<div>");
                 imageCard.addClass("image-card");
-                $(".two").append(imageCard);
+                $(".three").append(imageCard);
 
                 let topicImage = $("<img>");
                 topicImage.attr("src", element.images.fixed_width_still.url);
@@ -55,7 +64,7 @@ const gifMaker = {
 
                 let ratingParagraph = $("<p>");
                 ratingParagraph.addClass("rating");
-                ratingParagraph.text(element.rating);
+                ratingParagraph.html("rating:&nbsp;" + element.rating);
                 $(`.image-card:nth-of-type(${i})`).append(ratingParagraph);
                 i++;
             });
@@ -79,4 +88,8 @@ const gifMaker = {
 
 $(document).ready(() => {
     gifMaker.createButtons();
+    $("#add-topic").on("click", (e) => {
+        e.preventDefault();
+        gifMaker.addTopic();
+    });
 });

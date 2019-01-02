@@ -1,0 +1,173 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*  End Reset   */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: left;
+    color: #000000;
+}
+
+h2 {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000000;
+    display: inline;
+}
+
+form, input {
+    display: inline;
+}
+
+.wrapper {
+    width: 90%;
+    margin: 0px auto 0px auto;
+}
+
+.one, .two {
+    --button-width: 8rem;
+    --button-padding: 0.5rem;
+}
+
+.one {
+    --button-repeat: 2;
+    margin: 0px auto 0px auto;
+    width: calc((var(--button-width) + var(--button-padding) * 2) * var(--button-repeat));
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(var(--button-repeat), minmax(var(--button-width), 1fr));
+    grid-gap: 0.25rem;
+}
+
+@media only screen and (min-width: 768px) {
+    .one {
+        --button-repeat: 3;
+        width: calc((var(--button-width) + var(--button-padding) * 2) * var(--button-repeat));
+    }
+
+    .buttons {
+        grid-template-columns: repeat(var(--button-repeat), minmax(var(--button-width), 1fr));
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .one {
+        --button-repeat: 5;
+        width: calc((var(--button-width) + var(--button-padding) * 2) * var(--button-repeat));
+    }
+
+    .buttons {
+        grid-template-columns: repeat(var(--button-repeat), minmax(var(--button-width), 1fr));
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .one {
+        --button-repeat: 7;
+        width: calc((var(--button-width) + var(--button-padding) * 2) * var(--button-repeat));
+    }
+
+    .buttons {
+        grid-template-columns: repeat(var(--button-repeat), minmax(var(--button-width), 1fr));
+    }
+}
+
+.button {
+    padding: var(--button-padding);
+    width: var(--button-width);
+    background-color: #ffe100;
+    border: solid 1px #dac000;
+    border-radius: 15px;
+}
+
+.button:hover {
+    background-color: #ffff00;
+}
+
+.two {
+
+}
+
+input {
+    padding: 0.5rem;
+    border: solid 1px #dac000;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.three {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+    grid-gap: 2em;
+    align-items: center;
+}
+
+.image-card {
+   
+}
+
+.gif {
+    border-radius: 20px;
+    filter: drop-shadow(2px 2px 6px #999999);
+}
