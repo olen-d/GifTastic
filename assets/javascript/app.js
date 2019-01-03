@@ -16,6 +16,8 @@ let topics = [
     "wildlife"
 ];
 
+let topicsCalled = {};
+
 const gifMaker = {
    
     createButtons() {
@@ -41,18 +43,32 @@ const gifMaker = {
     },
 
     getGifs(thisTopic) {
-        $(".three").empty();
+        let limit = 10; //  Hard coded for now, consider allowing user to choose the number of gifs returned in the future
         let topic = thisTopic.attr("data-topic");
-        let queryURL = `https://api.giphy.com/v1/gifs/search?q=${topic}&api_key=C3B2bBZNWCN7FbYAWf7CfSZNN1CRAMl6&limit=10`
+        let offset = "";
+
+        if(!$("#add-to-collection")[0].checked) {
+            $(".three").empty();
+            topicsCalled[topic] = 1;
+        } else {
+            if(topic in topicsCalled) {
+                offset = topicsCalled[topic] * limit;
+                offset = "&offset=" + offset;
+                topicsCalled[topic] = topicsCalled[topic] + 1;
+            } else {
+                topicsCalled[topic] = 1;
+            }
+        }
+        
+        let queryURL = `https://api.giphy.com/v1/gifs/search?q=${topic}&api_key=C3B2bBZNWCN7FbYAWf7CfSZNN1CRAMl6${offset}&limit=${limit}`;
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function(response) {
-            let i = 1;
             response.data.forEach((element) => {
                 let imageCard = $("<div>");
                 imageCard.addClass("image-card");
-                $(".three").append(imageCard);
+                //$(".three").append(imageCard);
 
                 let topicImage = $("<img>");
                 topicImage.attr("src", element.images.fixed_width_still.url);
@@ -60,13 +76,21 @@ const gifMaker = {
                 topicImage.attr("data-animate", element.images.fixed_width.url);
                 topicImage.attr("data-state","still");
                 topicImage.addClass("gif");
-                $(`.image-card:nth-of-type(${i})`).append(topicImage);
-
+                //$(`.image-card:nth-of-type(${i})`).append(topicImage);
+                $(imageCard).append(topicImage);
+                
+                let titleParagraph = $("<p>");
+                titleParagraph.addClass("title");
+                titleParagraph.text(element.title);
+                $(imageCard).append(titleParagraph);
+                
                 let ratingParagraph = $("<p>");
                 ratingParagraph.addClass("rating");
                 ratingParagraph.html("rating:&nbsp;" + element.rating);
-                $(`.image-card:nth-of-type(${i})`).append(ratingParagraph);
-                i++;
+                $(imageCard).append(ratingParagraph);
+
+
+                $(".three").append(imageCard);
             });
             $(".gif").on("click", function() {
                 gifMaker.toggleGifState($(this));

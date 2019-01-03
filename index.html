@@ -15,7 +15,8 @@
 			  crossorigin="anonymous"></script>
 
         <!-- Google Fonts -->
-        
+        <link href="https://fonts.googleapis.com/css?family=Gravitas+One|Kadwa|Oswald" rel="stylesheet"> 
+
         <!-- Site Specific Styles -->
         <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
@@ -23,18 +24,30 @@
         <script src="assets/javascript/app.js"></script> 
     </head>
         <body>
+            <div class="header">
+                <h1>
+                    GIF Tastic
+                </h1>
+                <p>
+                    Welcome to GIF Tastic, a spiffy site leveraging Giphy to bring exciting animated GIFs on a variety of topics to the people. Clicking any GIF sets it in motion and clicking again stops the animation. 
+                </p>
+            </div>
             <div class="wrapper">
                 <div class="one">
                     <h1>
-                        Choose A Photography Style:
+                        Choose a Photography Style:
                     </h1>
                     <div class="buttons">
 
                     </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="add-to-collection">
+                        <label for="add-to-collection">add gifs to current collection</label>
+                    </div>
                 </div>
                 <div class="two">
                     <h2>
-                        Add A Photography Style:
+                        Add a Style:
                     </h2>
                     <form>
                         <input type="text" id="topic-input"> <input type="submit" class="button" id="add-topic" value="submit">

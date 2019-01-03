@@ -54,43 +54,75 @@ table {
 }
 
 body {
+    font-family: 'Oswald', sans-serif;
     text-align: center;
+    background-color: #ffffff;
+    color: #333333;
+}
+
+h1, h2 {
+    font-family: 'Kadwa', serif;
 }
 
 h1 {
     margin-bottom: 1rem;
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 400;
     text-align: left;
-    color: #000000;
+    color: #333333;
 }
 
 h2 {
     margin-bottom: 1rem;
     font-size: 1rem;
-    font-weight: 600;
-    color: #000000;
-    display: inline;
+    font-weight: 400;
+    color: #333333;
 }
 
-form, input {
-    display: inline;
+input {
+    margin-bottom: 1rem;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    height: 16rem;
+    margin-bottom: 2rem;
+    padding: 2rem 1rem 1rem 2rem;
+    background: url("../images/nathan-fertig-372737-unsplash.jpg") center no-repeat #ffffff;
+    background-size: cover;
+    text-shadow: 0px 0px 10px #333333;
+}
+
+.header h1 {
+    font-family: 'Gravitas One', cursive;
+    font-size: 2.5rem;
+}
+
+.header p {
+    padding: 1rem;
+    font-size: 1.0rem;
+    line-height: 1.5rem;
+    max-width: 18rem;
+    text-align: left;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.25);
+}
 }
 
 .wrapper {
     width: 90%;
     margin: 0px auto 0px auto;
+    padding-bottom: 3rem;
 }
 
 .one, .two {
     --button-width: 8rem;
     --button-padding: 0.5rem;
-}
-
-.one {
     --button-repeat: 2;
-    margin: 0px auto 0px auto;
     width: calc((var(--button-width) + var(--button-padding) * 2) * var(--button-repeat));
+    margin: 0px auto 0px auto;
 }
 
 .buttons {
@@ -99,8 +131,16 @@ form, input {
     grid-gap: 0.25rem;
 }
 
+.checkbox-container {
+    padding-top: 1rem;
+    text-align: left;
+}
+
 @media only screen and (min-width: 768px) {
-    .one {
+    .header p {
+        max-width: 32rem;
+    }
+    .one, .two {
         --button-repeat: 3;
         width: calc((var(--button-width) + var(--button-padding) * 2) * var(--button-repeat));
     }
@@ -111,18 +151,27 @@ form, input {
 }
 
 @media only screen and (min-width: 992px) {
-    .one {
+    form, input {
+        display: inline;
+    }
+
+    .one, .two {
         --button-repeat: 5;
         width: calc((var(--button-width) + var(--button-padding) * 2) * var(--button-repeat));
     }
 
     .buttons {
         grid-template-columns: repeat(var(--button-repeat), minmax(var(--button-width), 1fr));
+        padding-bottom: 1rem;
+    }
+
+    .two h2 {
+        display: inline-block;
     }
 }
 
 @media only screen and (min-width: 1200px) {
-    .one {
+    .one, .two {
         --button-repeat: 7;
         width: calc((var(--button-width) + var(--button-padding) * 2) * var(--button-repeat));
     }
@@ -133,10 +182,12 @@ form, input {
 }
 
 .button {
+    font-family: 'Oswald', sans-serif;
     padding: var(--button-padding);
     width: var(--button-width);
     background-color: #ffe100;
     border: solid 1px #dac000;
+    color: #000000;
     border-radius: 15px;
 }
 
@@ -145,7 +196,8 @@ form, input {
 }
 
 .two {
-
+    padding-top: 1rem;
+    text-align: left;
 }
 
 input {
@@ -156,6 +208,7 @@ input {
 }
 
 .three {
+    padding-top: 2rem;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
@@ -163,10 +216,14 @@ input {
     align-items: center;
 }
 
-.image-card {
-   
+.rating, .title {
+    margin-top: 1rem;
 }
 
+.rating {
+    text-transform: uppercase;
+    color: #888888;
+}
 .gif {
     border-radius: 20px;
     filter: drop-shadow(2px 2px 6px #999999);
