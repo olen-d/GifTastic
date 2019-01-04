@@ -33,13 +33,39 @@ const gifMaker = {
         });
     },
 
-    addTopic() {
+    validateTopic() {
         let newTopic = $("#topic-input").val().trim();
-        topics.push(newTopic);
-        topics.sort();
-        $(".buttons").empty();
-        $("#topic-input").val("");
-        gifMaker.createButtons();
+        if (newTopic === "") {
+            td = document.getElementById("topic-dialog");
+            td.showModal();
+            $("#topic-submit").on("click", () => {
+                let newTopic = $("#dialog-topic-input").val();
+                if(newTopic === "") {
+                    return;
+                } else {
+                    gifMaker.addTopic(newTopic);
+                }
+            });
+            $("#topic-cancel").on("click", () => {
+                document.getElementById("topic-dialog").close();
+                return;
+            });
+        } else {
+            gifMaker.addTopic(newTopic);
+        }
+    },
+
+    addTopic(newTopic) {
+        //  Avoid duplicate topics
+        if(topics.indexOf(newTopic) === -1) {
+            topics.push(newTopic);
+            topics.sort();
+            $(".buttons").empty();
+            $("#topic-input").val("");
+            gifMaker.createButtons();
+        } else {
+            $("#topic-input").val("");
+        }
     },
 
     getGifs(thisTopic) {
@@ -114,6 +140,6 @@ $(document).ready(() => {
     gifMaker.createButtons();
     $("#add-topic").on("click", (e) => {
         e.preventDefault();
-        gifMaker.addTopic();
+        gifMaker.validateTopic();
     });
 });
